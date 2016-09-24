@@ -6,5 +6,5 @@ RPM install package files, service file, enable service and reload nginx,
 
 Private repositories on github is non-free that's why I used public repository.
 
-application: https://github.com/axmetishe/meteor-todolist
-infrastructure: https://github.com/axmetishe/node-docker-ci
+- application: https://github.com/axmetishe/meteor-todolist
+- infrastructure: https://github.com/axmetishe/node-docker-ci
