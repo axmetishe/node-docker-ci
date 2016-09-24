@@ -1,0 +1,35 @@
+version: '2'
+services:
+  mongodb:
+    build: containers/mongodb
+    volumes:
+      - mongo-db:/data/db
+  app:
+    build: containers/app
+    links:
+      - mongodb
+    cap_add:
+      - SYS_ADMIN
+    expose:
+      - 22
+    ports:
+      - "80:80"
+    volumes:
+      - ./containers/app/config/vhosts:/etc/nginx/conf.d
+      - ./containers/app/config/html:/etc/nginx/html
+  jenkins-storage:
+    build: containers/jenkins-storage
+    volumes:
+      - /var/jenkins_home
+  jenkins:
+    build: containers/jenkins
+    privileged: true
+    ports:
+      - "8080:8080"
+    volumes_from:
+      - jenkins-storage
+    links:
+      - app
+
+volumes:
+  mongo-db: {}
